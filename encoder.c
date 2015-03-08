@@ -33,3 +33,19 @@ int encoder_ticks(void) {
   return encoder_command(1);
 }
 
+void encoder_reset() {        // reset the encoder position
+  encoder_command(0);
+}
+
+int encoder_angle() {         // read the encoder angle in 1/10 degrees
+  int tick_counter_ang;
+
+  tick_counter_ang = encoder_ticks() - 32768; // This is the encoder 0 dg/10
+
+  tick_counter_ang *= 2.694;
+
+  // 334 * 4 ticks / 360 degrees
+  // 334 encoders by line      
+  return tick_counter_ang;
+}          
+

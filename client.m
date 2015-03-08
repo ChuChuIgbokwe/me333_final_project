@@ -34,7 +34,7 @@ has_quit = false;
 % menu loop
 while ~has_quit
     % display the menu options
-    fprintf('d: Dummy Command    f: Sum 2 numbers    q: Quit\n');
+    fprintf('d: Dummy Command    f: Sum 2 numbers\nr: Count encoder ticks    a: Motor angle    i: Reset encoder\nq: Quit\n');
     % read the users choice
     selection = input('Enter Command: ', 's');
      
@@ -56,6 +56,14 @@ while ~has_quit
             fprintf(mySerial, '%d\n',n);            % send the number
             n = fscanf(mySerial,'%d');
             fprintf('Read: %d\n',n);
+        case 'r'                                    % read number of ticks
+            n = fscanf(mySerial,'%d');
+            fprintf('Number of ticks: %d\n',n);
+        case 'a'                                    % read angle
+            n = fscanf(mySerial,'%d');
+            fprintf('The rotor angle in deg/10: %d\n',n);
+        case 'i'                                    % reset encoder
+            fprintf('Encoder reseted\n');
         case 'q'
           has_quit = true;              % exit matlab
         otherwise

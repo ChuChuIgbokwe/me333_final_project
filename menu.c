@@ -1,5 +1,6 @@
 #include "NU32.h"          // config bits, constants, funcs for startup and UART
 // include other module headers here
+#include "encoder.h"
 
 #define BUF_SIZE 200
 
@@ -11,6 +12,7 @@ int main()
   NU32_LED2 = 1;        
   __builtin_disable_interrupts();
   // initialize other modules here
+  encoder_init();       // initialize the encoder module
   __builtin_enable_interrupts();
 
   while(1)
@@ -35,6 +37,25 @@ int main()
         NU32_ReadUART1(buffer,BUF_SIZE);
         sscanf(buffer, "%d", &n2);
         sprintf(buffer,"%d\r\n", n1 + n2);       // return the number + 1
+        NU32_WriteUART1(buffer);
+        break;
+      }
+      case 'r':
+      {
+        sprintf(buffer,"\%d", encoder_ticks());
+        NU32_WriteUART1(buffer);
+        break;
+      }
+      case 'a':
+      {
+        sprintf(buffer,"\%d", encoder_angle());
+        NU32_WriteUART1(buffer);
+        break;
+      }
+      case 'i':
+      {
+        encoder_reset();
+        sprintf(buffer,"\%d", encoder_ticks());
         NU32_WriteUART1(buffer);
         break;
       }
