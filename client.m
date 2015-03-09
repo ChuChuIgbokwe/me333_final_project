@@ -34,7 +34,7 @@ has_quit = false;
 % menu loop
 while ~has_quit
     % display the menu options
-    fprintf('d: Dummy Command    f: Sum 2 numbers\nr: Count encoder ticks    a: Motor angle    i: Reset encoder\nq: Quit\n');
+    fprintf('\n------MENU------\nd: Dummy Command    f: Sum 2 numbers\nr: Count encoder ticks    a: Motor angle    i: Reset encoder\nq: Quit\n');
     % read the users choice
     selection = input('Enter Command: ', 's');
      
@@ -57,11 +57,11 @@ while ~has_quit
             n = fscanf(mySerial,'%d');
             fprintf('Read: %d\n',n);
         case 'r'                                    % read number of ticks
-            n = fscanf(mySerial,'%d');
-            fprintf('Number of ticks: %d\n',n);
+            n_ticks = fscanf(mySerial,'%d');
+            fprintf('Number of ticks: %d\n',n_ticks);
         case 'a'                                    % read angle
-            n = fscanf(mySerial,'%d');
-            fprintf('The rotor angle in deg/10: %d\n',n);
+            r_ang = fscanf(mySerial,'%d');
+            fprintf('The rotor angle in deg/10: %d\n',r_ang);
         case 'i'                                    % reset encoder
             fprintf('Encoder reseted\n');
         case 'q'

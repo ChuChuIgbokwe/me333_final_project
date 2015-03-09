@@ -42,7 +42,7 @@ int encoder_angle() {         // read the encoder angle in 1/10 degrees
 
   tick_counter_ang = encoder_ticks() - 32768; // This is the encoder 0 dg/10
 
-  tick_counter_ang *= 2.694;
+  tick_counter_ang = (int)((float)tick_counter_ang * 2.694);
 
   // 334 * 4 ticks / 360 degrees
   // 334 encoders by line      
