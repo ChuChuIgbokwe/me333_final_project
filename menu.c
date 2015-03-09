@@ -1,6 +1,7 @@
 #include "NU32.h"          // config bits, constants, funcs for startup and UART
 // include other module headers here
 #include "encoder.h"
+#include "utilities.h"
 
 #define BUF_SIZE 200
 
@@ -57,7 +58,12 @@ int main()
         encoder_reset();
         break;
       }
-
+      case 's':										// the number of encoder ticks
+      {
+        sprintf(buffer,"%d\r\n", util_state_get());
+        NU32_WriteUART1(buffer);
+        break;
+      }
       case 'q':
       {
         // util_state_set()
