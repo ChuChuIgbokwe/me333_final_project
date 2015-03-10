@@ -34,7 +34,7 @@ has_quit = false;
 % menu loop
 while ~has_quit
     % display the menu options
-    fprintf('\n------MENU------\nd: Dummy Command    f: Sum 2 numbers\nr: Count encoder ticks    a: Motor angle    i: Reset encoder\ns: Retrieve state\nq: Quit\n');
+    fprintf('\n------MENU------\nd: Dummy Command    f: Sum 2 numbers\nr: Count encoder ticks    a: Motor angle    i: Reset encoder\ns: Retrieve state\nh: Retrieve sensor tick\nq: Quit\n');
     % read the users choice
     selection = input('Enter Command: ', 's');
      
@@ -67,6 +67,9 @@ while ~has_quit
         case 's'                                    % retrieve the current state
             c_state = fscanf(mySerial,'%d');
             fprintf('Current State Number: %d\n',c_state);
+        case 'h'                                    % retrieve sensor ticks
+            s_tick = fscanf(mySerial,'%d');
+            fprintf('Sensor tick: %d\n',s_tick);
         case 'q'
           has_quit = true;              % exit matlab
         otherwise

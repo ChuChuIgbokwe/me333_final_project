@@ -2,6 +2,7 @@
 // include other module headers here
 #include "encoder.h"
 #include "utilities.h"
+#include "isense.h"
 
 #define BUF_SIZE 200
 
@@ -14,6 +15,7 @@ int main()
   __builtin_disable_interrupts();
   // initialize other modules here
   encoder_init();       // initialize the encoder module
+  isense_init();		// initialize ADC
   __builtin_enable_interrupts();
 
   while(1)
@@ -61,6 +63,12 @@ int main()
       case 's':										// the number of encoder ticks
       {
         sprintf(buffer,"%d\r\n", util_state_get());
+        NU32_WriteUART1(buffer);
+        break;
+      }
+      case 'h':										// the number of encoder ticks
+      {
+        sprintf(buffer,"%d\r\n", isense_ticks());
         NU32_WriteUART1(buffer);
         break;
       }
