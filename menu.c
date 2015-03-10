@@ -66,9 +66,15 @@ int main()
         NU32_WriteUART1(buffer);
         break;
       }
-      case 'h':										// the number of encoder ticks
+      case 'h':										// return the ticks of AN0
       {
         sprintf(buffer,"%d\r\n", isense_ticks());
+        NU32_WriteUART1(buffer);
+        break;
+      }
+      case 'j':										// return the current provided to AN0
+      {
+        sprintf(buffer,"%d\r\n", isense_amps());
         NU32_WriteUART1(buffer);
         break;
       }

@@ -46,6 +46,12 @@ short isense_ticks()   // read the current sensor, in ADC ticks
 
 int isense_amps()      // read the current sensor, in mA
 {
+	short ticks;
+	int amps;
 
+	ticks = isense_ticks();
+
+	amps = 1.9533 * ticks - 994.25; 		// y = 1.9533x - 994.25 where x: ticks & y: current
+	return amps;
 }
 
